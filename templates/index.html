@@ -2,159 +2,207 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>🔻 Baixador Futurista de Vídeos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🔻 Baixador de Vídeos</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
     <style>
         html,
         body {
-            height: 100%;
             margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse at center, #0a0a0f 0%, #050510 100%);
+            color: #ffffff;
         }
 
-        body {
-            background: linear-gradient(135deg, #4b3b72 30%, #2a2731 70%, #1f1f1f 100%);
-            color: #ddd;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
+        /* Título maior no topo da página */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+            user-select: none;
+        }
+
+        #typed-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #f7f7f7;
+        }
+
+        #typed-subtitle {
+            font-size: 1.5rem;
+            color: #aaccee;
+            margin-top: 15px;
+            min-height: 50px;
         }
 
         .container {
-            flex: 1 0 auto;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 40px 15px;
+            min-height: 60vh;
+            flex-direction: column;
         }
 
         .glass-card {
-            background: rgba(75, 59, 114, 0.15);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(75, 59, 114, 0.6);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(130, 70, 200, 0.3);
+            background: rgba(15, 15, 30, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 600px;
             width: 100%;
-            max-width: 500px;
-            color: #eee;
-            box-sizing: border-box;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 123, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        /* Form container transparente */
+        form {
+            margin-top: 40px;
+            width: 100%;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Input transparente com linha embaixo */
         input {
-            background-color: #2e004f;
-            color: #ddd;
-            border: 1px solid #6e4db7;
-            border-radius: 8px;
-            width: 100%;
-            padding: 10px 15px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        input::placeholder {
-            color: #a18eff;
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 2px solid #66c3ff !important;
+            border-radius: 0 !important;
+            color: #ffffff !important;
+            font-size: 1rem !important;
+            padding: 12px 10px !important;
+            transition: border-color 0.3s ease !important;
+            box-shadow: none !important;
         }
 
         input:focus {
-            outline: none;
-            border-color: #b39ddb;
-            box-shadow: 0 0 8px #9a7fed;
-            background-color: #3c0073;
-            color: white;
+            border-bottom: 2px solid #ffffff !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
         }
 
+        input::placeholder {
+            color: #9ac7ff;
+            opacity: 1;
+        }
+
+        /* Botão transparente com linha embaixo */
         button {
-            background-color: transparent;
-            border: 2px solid #b39ddb;
-            color: #b39ddb;
-            font-weight: 600;
-            border-radius: 8px;
-            padding: 10px 20px;
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 2px solid #66c3ff !important;
+            color: #66c3ff !important;
+            font-weight: 600 !important;
+            padding: 12px !important;
+            border-radius: 0 !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
             cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        button:hover {
-            background-color: #9a7fed;
-            border-color: #9a7fed;
-            color: #1f1f1f;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
+        button:hover,
+        button:focus {
+            border-bottom: 2px solid #ffffff !important;
+            color: #ffffff !important;
+            outline: none !important;
         }
 
         .spinner-border {
             width: 2.5rem;
             height: 2.5rem;
-            border-width: 0.3em;
-            border-top-color: #b39ddb;
-            border-right-color: transparent;
-            margin: 20px auto 0;
-            border-style: solid;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            color: #66c3ff;
         }
 
         video {
             width: 100%;
             border-radius: 12px;
             margin-top: 20px;
-            box-shadow: 0 0 12px #7a5adf;
-            background-color: #1f1f1f;
+            background-color: #0d1e3a;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
         }
 
-        a.btn-success {
-            display: inline-block;
-            background-color: #7a5adf;
-            border: none;
+        .video-container {
+            background-color: #0d6efdcc;
+            /* azul translúcido */
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 0 20px #000000bb;
+            margin-top: 30px;
+            color: #e0e7ff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
             font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 8px;
-            color: #eee;
-            text-decoration: none;
+            border-radius: 10px;
             margin-top: 15px;
+            width: 100%;
+            border: none;
+            padding: 12px;
+            color: white;
+            cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-        a.btn-success:hover {
-            background-color: #a18eff;
-            color: #1f1f1f;
+        .btn-success:hover {
+            background-color: #218838;
         }
 
-        footer.footer {
-            flex-shrink: 0;
-            padding: 15px 10px;
-            font-size: 0.9rem;
-            color: #b9a8f0;
-            border-top: 1px solid rgba(161, 142, 255, 0.3);
-            user-select: none;
-            font-weight: 500;
+        .btn-outline-primary {
+            border: 2px solid #66c3ff;
+            color: #66c3ff;
+            background: transparent;
+            width: 100%;
+            padding: 10px 0;
+            font-weight: 600;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #66c3ff;
+            color: #0e0e1a;
+        }
+
+        .footer {
             text-align: center;
+            padding: 20px 10px;
+            font-size: 0.9rem;
+            color: #aabbe1;
+            margin-top: 40px;
+            width: 100%;
+            user-select: none;
         }
 
-        footer.footer a {
-            color: #a18eff;
+        .footer a {
+            color: #66c3ff;
             text-decoration: none;
         }
 
-        footer.footer a:hover {
-            color: #d1c5ff;
+        .footer a:hover {
             text-decoration: underline;
+        }
+
+        .img-fluid {
+            max-height: 180px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
         }
     </style>
 
@@ -163,47 +211,99 @@
             document.getElementById("formulario").style.display = "none";
             document.getElementById("carregando").style.display = "block";
         }
+
+        function mostrarAjudaSalvar() {
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const isAndroid = /Android/i.test(navigator.userAgent);
+
+            if (isIOS) {
+                alert("📲 iPhone:\n1. Após baixar, toque em compartilhar.\n2. Selecione 'Salvar Vídeo'.");
+            } else if (isAndroid) {
+                alert("📁 Android:\n1. O vídeo foi salvo na pasta Downloads.\n2. Ele aparecerá na galeria automaticamente ou após reiniciar.");
+            } else {
+                alert("💻 Computador:\nO vídeo está na sua pasta de downloads.");
+            }
+        }
+
+        // Efeito de digitação
+        document.addEventListener("DOMContentLoaded", function () {
+            const titleEl = document.getElementById("typed-title");
+            const subtitleEl = document.getElementById("typed-subtitle");
+
+            const titleText = "🚀Download of Videos";
+            const subtitleText = "Cole o link de um vídeo do TikTok, YouTube ou Facebook e baixe com um clique!";
+
+            let i = 0;
+            let j = 0;
+
+            function typeTitle() {
+                if (i < titleText.length) {
+                    titleEl.textContent += titleText.charAt(i);
+                    i++;
+                    setTimeout(typeTitle, 60);
+                } else {
+                    setTimeout(typeSubtitle, 500);
+                }
+            }
+
+            function typeSubtitle() {
+                if (j < subtitleText.length) {
+                    subtitleEl.textContent += subtitleText.charAt(j);
+                    j++;
+                    setTimeout(typeSubtitle, 25);
+                }
+            }
+
+            typeTitle();
+        });
     </script>
 </head>
 
 <body>
+
+    <header>
+        <h1 class="typing-title" id="typed-title"></h1>
+        <p class="typing-subtitle" id="typed-subtitle"></p>
+    </header>
+
     <div class="container">
         <div class="glass-card text-center">
 
-            <h2 class="mb-4">🚀 Baixar Vídeo do TikTok, Youtube e Facebook</h2>
-
+            <!-- Formulário transparente -->
             <form method="POST" id="formulario" onsubmit="mostrarCarregando()">
-                <input name="url" class="form-control mb-3" placeholder="Cole o link aqui 👽" required>
-                <button type="submit" class="btn btn-outline-light w-100">🔻 Baixar 🐼</button>
+                <input name="url" placeholder="Cole o link aqui 🌀" required autocomplete="off" />
+                <button type="submit">Baixar Agora</button>
             </form>
 
+            <!-- Loading -->
             <div id="carregando" style="display: none;">
-                <div class="spinner-border text-light" role="status"></div>
-                <p class="mt-3">Baixando vídeo... aguarde.</p>
+                <div class="spinner-border" role="status"></div>
+                <p class="mt-3">Baixando vídeo... Aguarde ⏳</p>
                 {% if loading_img %}
-                <img src="{{ url_for('static', filename=loading_img) }}" alt="Imagem aleatória"
-                    class="img-fluid mt-3 rounded shadow" style="max-height: 200px;">
+                <img src="{{ url_for('static', filename=loading_img) }}" alt="Imagem de carregamento"
+                    class="img-fluid mt-3 shadow" />
                 {% endif %}
             </div>
 
-
+            <!-- Exibição de erro ou vídeo baixado -->
             {% if error %}
-            <div class="alert alert-danger mt-4">
-                ❌ {{ error }}
-            </div>
+            <div class="alert alert-danger mt-4">❌ {{ error }}</div>
             {% elif filename %}
-            <div class="mt-4">
+            <div class="video-container">
                 <video controls>
-                    <source src="/download/{{ filename }}" type="video/mp4">
+                    <source src="/download/{{ filename }}" type="video/mp4" />
                     Seu navegador não suporta vídeo.
                 </video>
-                <a href="/download/{{ filename }}" download class="btn btn-success mt-3 w-100">📥 Salvar Vídeo</a>
+                <a href="/download/{{ filename }}" download class="btn-success">📥 Salvar Vídeo</a>
+                <button onclick="mostrarAjudaSalvar()" class="btn-outline-primary">
+                    💡 Como salvar o vídeo na galeria?
+                </button>
             </div>
             {% endif %}
         </div>
     </div>
 
-    <footer class="footer mt-5 text-center">
+    <footer class="footer">
         <p>© 2025 Criado por <strong>Wendel Kauã</strong> | Contato: <a href="tel:+5586994410695">86 99441-0695</a></p>
     </footer>
 </body>
